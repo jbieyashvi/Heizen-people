@@ -1,0 +1,68 @@
+import type { Ticket } from "@/lib/types";
+
+/** Recent tickets for the signed-in employee (mock). */
+export const recentTickets: Ticket[] = [
+  {
+    id: "HSC-2026-000318",
+    subject: "Reimbursement receipt required",
+    category: "Payroll",
+    priority: "High",
+    assignedTeam: "Payroll",
+    status: "Waiting for Employee",
+    updatedOn: "12 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000297",
+    subject: "New laptop request for onboarding",
+    category: "Assets",
+    priority: "Medium",
+    assignedTeam: "IT Support",
+    status: "In Progress",
+    updatedOn: "11 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000284",
+    subject: "Employment verification letter",
+    category: "Employment Documents",
+    priority: "Low",
+    assignedTeam: "HR",
+    status: "Assigned",
+    updatedOn: "10 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000271",
+    subject: "VPN access not working from home",
+    category: "IT Support",
+    priority: "High",
+    assignedTeam: "IT Support",
+    status: "Open",
+    updatedOn: "09 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000255",
+    subject: "Correction in June payslip",
+    category: "Payroll",
+    priority: "Medium",
+    assignedTeam: "Payroll",
+    status: "Resolved",
+    updatedOn: "05 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000238",
+    subject: "Update emergency contact details",
+    category: "HR",
+    priority: "Low",
+    assignedTeam: "HR",
+    status: "Closed",
+    updatedOn: "01 Jul 2026",
+  },
+  {
+    id: "HSC-2026-000221",
+    subject: "Access to design tooling licenses",
+    category: "IT Support",
+    priority: "Medium",
+    assignedTeam: "IT Support",
+    status: "Resolved",
+    updatedOn: "27 Jun 2026",
+  },
+];
