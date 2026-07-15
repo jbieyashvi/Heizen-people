@@ -85,9 +85,31 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-2.5" aria-label="Primary">
-        {primaryNav.map((item) => (
-          <NavLink key={item.key} item={item} collapsed={collapsed} active={isActive(pathname, item.href)} />
-        ))}
+        {primaryNav.map((item) => {
+          const parentActive = isActive(pathname, item.href);
+          const children = item.children ?? [];
+          const showChildren =
+            !collapsed &&
+            children.length > 0 &&
+            (parentActive || children.some((c) => isActive(pathname, c.href)));
+          return (
+            <div key={item.key} className="flex flex-col gap-1">
+              <NavLink item={item} collapsed={collapsed} active={parentActive} />
+              {showChildren && (
+                <div className="ml-4 flex flex-col gap-1 border-l border-[#EAECEE] pl-2">
+                  {children.map((child) => (
+                    <NavLink
+                      key={child.key}
+                      item={child}
+                      collapsed={collapsed}
+                      active={isActive(pathname, child.href)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
 
         <div className="my-2 border-t border-[#EAECEE]" />
 

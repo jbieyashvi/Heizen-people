@@ -9,10 +9,10 @@ export const statusSummary: StatusSummaryItem[] = [
   { key: "closed", label: "Closed", count: 28 },
 ];
 
-/** Ticket currently awaiting the employee's response. */
+/** Ticket currently awaiting the employee's response (a real seeded ticket). */
 export const actionRequired: ActionItem = {
-  ticketId: "HSC-2026-000318",
-  subject: "Reimbursement receipt required",
+  ticketId: "HSC-2026-000335",
+  subject: "Reimbursement for client travel expenses",
   team: "Payroll",
   message: "Payroll needs additional information from you.",
 };

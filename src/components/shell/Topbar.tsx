@@ -3,17 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Bell, ChevronDown, Search } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { currentEmployee } from "@/lib/data/employee";
+import type { Employee } from "@/lib/types";
 import { unreadCount } from "@/lib/data/notifications";
 import { Avatar } from "@/components/ui/Avatar";
 import { NotificationPanel } from "@/components/shell/NotificationPanel";
-import { ProfileMenu } from "@/components/shell/ProfileMenu";
+import { ProfileMenu, type ProfileLink } from "@/components/shell/ProfileMenu";
 
 interface TopbarProps {
   title: string;
+  user: Employee;
+  profileLinks: ProfileLink[];
 }
 
-export function Topbar({ title }: TopbarProps) {
+export function Topbar({ title, user, profileLinks }: TopbarProps) {
   const [notifOpen, setNotifOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -97,13 +99,18 @@ export function Topbar({ title }: TopbarProps) {
               "flex items-center gap-2 rounded-md py-1 pl-1 pr-2 outline-none hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-heizen-400",
             )}
           >
-            <Avatar initials={currentEmployee.initials} />
+            <Avatar initials={user.initials} />
             <span className="hidden text-sm font-medium text-slate-700 md:block">
-              {currentEmployee.firstName}
+              {user.firstName}
             </span>
             <ChevronDown className="hidden h-4 w-4 text-slate-400 md:block" strokeWidth={1.75} aria-hidden />
           </button>
-          <ProfileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+          <ProfileMenu
+            open={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            user={user}
+            links={profileLinks}
+          />
         </div>
       </div>
     </header>

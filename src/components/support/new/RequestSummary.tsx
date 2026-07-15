@@ -1,13 +1,13 @@
 import { Info, Users } from "lucide-react";
 import { PriorityBadge } from "@/components/ui/PriorityBadge";
-import type { AssignedTeam, TicketPriority } from "@/lib/types";
+import type { TicketPriority } from "@/lib/types";
 
 interface RequestSummaryProps {
   categoryLabel: string | null;
   requestType: string | null;
   priority: TicketPriority;
   attachmentCount: number;
-  assignedTeam: AssignedTeam | null;
+  assignedTeam: string | null;
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {

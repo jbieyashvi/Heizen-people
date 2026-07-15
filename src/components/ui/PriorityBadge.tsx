@@ -5,12 +5,14 @@ const PRIORITY_STYLES: Record<TicketPriority, string> = {
   Low: "text-slate-500",
   Medium: "text-heizen-700",
   High: "text-amber-600",
+  Critical: "text-red-600",
 };
 
 const DOT_STYLES: Record<TicketPriority, string> = {
   Low: "bg-slate-300",
   Medium: "bg-heizen-500",
   High: "bg-amber-500",
+  Critical: "bg-red-500",
 };
 
 export function PriorityBadge({ priority }: { priority: TicketPriority }) {

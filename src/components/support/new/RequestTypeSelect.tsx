@@ -2,21 +2,23 @@
 
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { getRequestTypes } from "@/lib/config/ticketForm";
-import type { TicketCategoryKey } from "@/lib/types";
+import type { RequestType } from "@/lib/admin/categoryTypes";
 import { FieldBlock } from "./FieldBlock";
 
 interface RequestTypeSelectProps {
-  category: TicketCategoryKey | null;
+  /** Active + visible request types for the selected category. */
+  options: RequestType[];
+  categorySelected: boolean;
   value: string | null;
-  onChange: (value: string) => void;
+  onChange: (rt: RequestType) => void;
   error?: string;
   fieldId: string;
+  readOnly?: boolean;
 }
 
-export function RequestTypeSelect({ category, value, onChange, error, fieldId }: RequestTypeSelectProps) {
-  const options = getRequestTypes(category);
-  const disabled = !category;
+export function RequestTypeSelect({ options, categorySelected, value, onChange, error, fieldId, readOnly }: RequestTypeSelectProps) {
+  const disabled = !categorySelected || readOnly;
+  const selected = options.find((o) => o.name === value);
 
   return (
     <FieldBlock
@@ -24,14 +26,17 @@ export function RequestTypeSelect({ category, value, onChange, error, fieldId }:
       label="Request Type"
       required
       error={error}
-      hint={disabled ? "Select a category first to see request types." : undefined}
+      hint={!categorySelected ? "Select a category first to see request types." : selected?.helperText || undefined}
     >
       <div className="relative">
         <select
           id={fieldId}
           value={value ?? ""}
           disabled={disabled}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            const rt = options.find((o) => o.name === e.target.value);
+            if (rt) onChange(rt);
+          }}
           aria-invalid={error ? true : undefined}
           className={cn(
             "h-10 w-full appearance-none rounded-md border bg-white pl-3 pr-9 text-sm outline-none transition-colors",
@@ -40,20 +45,12 @@ export function RequestTypeSelect({ category, value, onChange, error, fieldId }:
             disabled ? "cursor-not-allowed bg-surface-muted text-slate-400" : "text-slate-700",
           )}
         >
-          <option value="" disabled>
-            {disabled ? "—" : "Select a request type"}
-          </option>
+          <option value="" disabled>{!categorySelected ? "—" : "Select a request type"}</option>
           {options.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
+            <option key={type.id} value={type.name}>{type.name}</option>
           ))}
         </select>
-        <ChevronDown
-          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-          strokeWidth={1.75}
-          aria-hidden
-        />
+        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" strokeWidth={1.75} aria-hidden />
       </div>
     </FieldBlock>
   );

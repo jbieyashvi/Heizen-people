@@ -6,6 +6,7 @@ import {
   FileText,
   LifeBuoy,
   Settings,
+  Ticket,
 } from "lucide-react";
 import type { NavItem } from "@/lib/types";
 
@@ -28,7 +29,15 @@ export const primaryNav: NavItem[] = [
     icon: FileText,
     comingSoon: true,
   },
-  { key: "support", label: "Support Center", href: "/support", icon: LifeBuoy },
+  {
+    key: "support",
+    label: "Support Center",
+    href: "/support",
+    icon: LifeBuoy,
+    children: [
+      { key: "my-tickets", label: "My Tickets", href: "/support/tickets", icon: Ticket },
+    ],
+  },
 ];
 
 export const secondaryNav: NavItem[] = [

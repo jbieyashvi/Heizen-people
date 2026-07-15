@@ -1,14 +1,11 @@
-import { Ticket } from "lucide-react";
-import { PagePlaceholder } from "@/components/ui/PagePlaceholder";
+import { Suspense } from "react";
+import { MyTicketsView } from "@/components/support/tickets/MyTicketsView";
+import { TicketsTableSkeleton } from "@/components/support/tickets/TicketsTableSkeleton";
 
 export default function MyTicketsPage() {
   return (
-    <PagePlaceholder
-      icon={Ticket}
-      title="My Tickets"
-      description="A full, filterable list of all your support tickets will live here. For now, your most recent tickets are shown on the Support Center dashboard."
-      backHref="/support"
-      backLabel="Back to Support Center"
-    />
+    <Suspense fallback={<TicketsTableSkeleton />}>
+      <MyTicketsView />
+    </Suspense>
   );
 }
